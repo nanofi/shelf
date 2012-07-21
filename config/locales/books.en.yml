@@ -1,0 +1,19 @@
+en:
+  books:
+    index: 'All books'
+    new: 'Add book'
+    edit: 'Edit book'
+    show: "Book '%{title}'"
+    search: 'Search books'
+  activerecord:
+    models:
+      book: Book
+    attributes:
+      book:
+        title: "<i class='icon-book'></i> Title"
+        image: "<i class='icon-picture'></i> Image"
+        isbn: "<i class='icon-barcode'></i> ISBN"
+        authors: "<i class='icon-group'></i> Authors"
+        publisher: "<i class='icon-print'></i> Publisher"
+        published: "<i class='icon-calendar'></i> Published Date"
+        description: "<i class='icon-info-sign'></i> Description"

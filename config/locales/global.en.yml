@@ -1,0 +1,5 @@
+en:
+  defaults:
+    site: 'Shelf'
+  sidebar:
+    title: 'Actions'

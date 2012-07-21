@@ -1,0 +1,19 @@
+ja:
+  books:
+    index: '本の一覧'
+    new: '本を追加'
+    edit: '本を編集'
+    show: "本 '%{title}'"
+    search: '本を検索'
+  activerecord:
+    models:
+      book: 本
+    attributes:
+      book:
+        title: "<i class='icon-book'></i> タイトル"
+        image: "<i class='icon-picture'></i> イメージ"
+        isbn: "<i class='icon-barcode'></i> ISBN"
+        authors: "<i class='icon-group'></i> 著者"
+        publisher: "<i class='icon-print'></i> 出版社"
+        published: "<i class='icon-calendar'></i> 発行日時"
+        description: "<i class='icon-info-sign'></i> 説明"

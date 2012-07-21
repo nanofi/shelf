@@ -1,0 +1,69 @@
+!!! 5
+%html{lang: locale}
+  %head
+    %meta(charset="utf-8")
+    %meta(http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1")
+    %meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    = display_meta_tags default_meta_tags
+    = csrf_meta_tags
+    / Le HTML5 shim, for IE6-8 support of HTML elements
+    /[if lt IE 9]
+      = javascript_include_tag "http://html5shim.googlecode.com/svn/trunk/html5.js"
+    = stylesheet_link_tag "application", :media => "all"
+    %link(href="images/apple-touch-icon-144x144.png" rel="apple-touch-icon-precomposed" sizes="144x144")
+    %link(href="images/apple-touch-icon-114x114.png" rel="apple-touch-icon-precomposed" sizes="114x114")
+    %link(href="images/apple-touch-icon-72x72.png" rel="apple-touch-icon-precomposed" sizes="72x72")
+    %link(href="images/apple-touch-icon.png" rel="apple-touch-icon-precomposed")
+    %link(href="images/favicon.ico" rel="shortcut icon")
+
+
+  %body
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container
+          %a.btn.btn-navbar(data-target=".nav-collapse" data-toggle="collapse")
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          = link_to 'Shelf', root_path, class: 'brand'
+          .container.nav-collapse
+            %ul.nav.pull-left
+            = form_tag({action: :search}, {class: 'navbar-search pull-left form-inline'}) do
+              = label_tag :query, "<i class='icon-search'></i>".html_safe
+              = text_field_tag :query, nil, placefolder: t('books.search'), class: 'search-query'
+            %ul.nav.pull-right      
+              %li
+                = link_to books_path do
+                  %i.icon-book
+                  = t('books.index')
+              %li
+                = link_to new_book_path do
+                  %i.icon-plus
+
+    .container
+
+      .content
+        .row
+          .span9
+            %h1= display_title
+            = yield
+          .span3
+            .well.sidebar-nav
+              %h3= t('sidebar.title')
+              %ul.nav.nav-list
+                %li{class: disabled_current(books_path)}
+                  = link_to books_path do
+                    %i.icon-book
+                    = t('books.index')
+                %li{class: disabled_current(new_book_path)}
+                  = link_to new_book_path do
+                    %i.icon-plus
+                    = t('books.new')
+    
+      %footer
+        %p &copy; Kazuto Fukuchi 2012
+    /
+      Javascripts
+      \==================================================
+    / Placed at the end of the document so the pages load faster
+    = javascript_include_tag "application"

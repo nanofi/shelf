@@ -1,0 +1,13 @@
+= simple_form_for(@book) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :title
+    = f.input :image
+    = f.input :authors
+    = f.input :publisher
+    = f.input :published, input_html: {class: 'span1'}
+    = f.input :description, input_html: {class: 'span9'}
+
+  .form-actions
+    = f.button :submit, class: 'btn btn-primary'

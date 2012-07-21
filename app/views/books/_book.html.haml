@@ -1,0 +1,16 @@
+= image_tag book.image, alt: book.title, height: '180'
+.caption
+  %h2
+    = book.title.html_safe
+  %dl
+    %dt= raw Book.human_attribute_name(:isbn)
+    %dd= book.isbn
+    %dt= raw Book.human_attribute_name(:authors)
+    %dd
+      %ul.unstyled= book.authors.html_safe
+    %dt= raw Book.human_attribute_name(:publisher)  
+    %dd= book.publisher
+    %dt= raw Book.human_attribute_name(:published)
+    %dd= book.published
+    %dt= raw Book.human_attribute_name(:description)
+    %dd= book.description

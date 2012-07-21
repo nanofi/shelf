@@ -1,0 +1,12 @@
+- set_meta_tags title: t('books.new')
+= simple_form_for(@book) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :isbn, input_html: {class: 'span9'}
+
+  .form-actions
+    = f.button :submit, class: 'btn btn-primary'
+
+
+= link_to 'Back', books_path

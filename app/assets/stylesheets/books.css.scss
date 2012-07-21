@@ -1,0 +1,40 @@
+// Place all the styles related to the books controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@mixin gradient($from, $to) {
+  background-color: $from;
+  background-image: -moz-linear-gradient($from, $to);
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from($from), to($to));
+  background-image: -webkit-linear-gradient($from, $to);
+  background-image: -o-linear-gradient($from, $to);
+}
+@mixin border-radius($radius) {
+  -moz-border-radius: $radius;
+  -webkit-border-radius: $radius;
+  -ms-border-radius: $radius;
+  border-radius: $radius;
+}
+.book-item {
+  position: relative;
+  height: 560px;
+  overflow: hidden;
+  color: #333;
+  &:hover {
+    color: #333;
+    text-decoration: none;
+  }
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: -4px;
+    visibility: visible;
+    width: 276px;
+    height: 12px;
+    z-index: 3;
+    @include gradient(rgba(0,0,0,0), rgba(0,0,0,.1));
+    @include border-radius(0 0 4px 4px);
+  }
+}

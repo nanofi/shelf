@@ -1,0 +1,7 @@
+- set_meta_tags title: t('books.index')
+= paginate @books
+%ul.thumbnails
+  - @books.each do |book|
+    %li.span3
+      = link_to book, class: 'thumbnail book-item' do
+        = render book

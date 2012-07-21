@@ -1,0 +1,11 @@
+- set_meta_tags title: t('books.show', title: @book.title)
+%p#notice= notice
+
+= render @book
+= render partial: 'links', locals: {book: @book}
+
+= link_to 'Edit', edit_book_path(@book)
+\|
+= link_to 'Delete', book_path(@book), method: :delete
+\|
+= link_to 'Back', books_path

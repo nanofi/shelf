@@ -1,0 +1,6 @@
+%h3= t('books.links')
+%ul.unstyled
+  - if book.google?
+    %li
+      %i.icon-google-plus
+      = link_to book.google_url, book.google_url

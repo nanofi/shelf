@@ -1,0 +1,5 @@
+ja:
+  defaults:
+    site: 'Shelf'
+  sidebar:
+    title: '操作'
