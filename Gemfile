@@ -26,6 +26,7 @@ gem 'simple_form'
 gem 'haml-rails'
 gem 'meta-tags', :require => 'meta_tags'
 gem 'kaminari'
+gem 'nokogiri'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

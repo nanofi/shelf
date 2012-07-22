@@ -2,5 +2,8 @@
 %ul.unstyled
   - if book.google?
     %li
-      %i.icon-google-plus
+      %i.icon-none= image_tag "http://favicon.hatena.ne.jp/?url=#{book.google_url}"
       = link_to book.google_url, book.google_url
+    %li
+      %i.icon-none= image_tag "http://favicon.hatena.ne.jp/?url=#{book.amazon_url}"
+      = link_to book.amazon_url, book.amazon_url

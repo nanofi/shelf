@@ -1,4 +1,5 @@
 - set_meta_tags title: t('books.show', title: @book.title)
+- set_meta_tags open_graph: {  title: @book.title,  type: :book, url: book_url(@book), image: @book.image, description: @book.description, 'book:isbn' => @book.isbn,  'book:release_date' => @book.published }
 %p#notice= notice
 
 = render @book

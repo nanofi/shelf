@@ -1,5 +1,6 @@
 require 'json'
 require 'open-uri'
+require 'nokogiri'
 class Book < ActiveRecord::Base
   default_scope order: 'updated_at DESC'
   attr_accessible :image, :isbn, :place, :title, :authors, :publisher, :published, :description, :google
@@ -9,11 +10,11 @@ class Book < ActiveRecord::Base
     image.blank? ? 'default.png' : image
   end
 
-  def google?
-    google.present?
-  end
   def google_url
-    "http://books.google.com/books?id=#{google}"
+    google.present? ? "http://books.google.com/books?id=#{google}" : "http://books.google.com/books?vid=ISBN#{isbn}"
+  end
+  def amazon_url
+    "http://www.amazon.co.jp/dp/#{isbn}"
   end
 
   before_save :store_from_isbn
@@ -27,7 +28,7 @@ class Book < ActiveRecord::Base
         /^ISBN/ =~ i['type'] and i['identifier'] == self.isbn
       end
     end.first unless @retrived['items'].nil?
-    return false if book.nil?
+    return true if book.nil?
     info = book['volumeInfo']
     self.google = book['id']
     self.title = info['title']
@@ -41,11 +42,19 @@ class Book < ActiveRecord::Base
     self.description = info['description']
     self.image = info['imageLinks']['thumbnail'] unless info['imageLinks'].nil?
   end
+  def search_amazon
+    retrive = Nokogiri::HTML(open('http://www.amazon.co.jp/dp/#{isbn}'))
+    self.title = retrive.css('#btAsinTitle').text.to_s
+    self.description = retrive.css('#productDescription .content').text.to_s
+    self.image = "http://ecx.images-amazon.com/images/P/#{isbn}.01.LZZZZZZ"
+  end
+  def search_rakuten
+  end
   def store_from_isbn
     return unless isbn_changed?
     isbn.strip!
-    unless search_google
-      
-    end
+    r = search_google
+    r = search_amazon if r
+    r = search_rakuten if r
   end
 end
