@@ -45,10 +45,13 @@ class Book < ActiveRecord::Base
     self.image = info['imageLinks']['thumbnail'] unless info['imageLinks'].nil?
   end
   def search_amazon
-    retrive = Nokogiri::HTML(open('http://www.amazon.co.jp/dp/#{isbn}'))
-    self.title = retrive.css('#btAsinTitle').text.to_s
-    self.description = retrive.css('#productDescription .content').text.to_s
-    self.image = "http://ecx.images-amazon.com/images/P/#{isbn}.01.LZZZZZZ"
+    begin
+      retrive = Nokogiri::HTML(open("http://www.amazon.co.jp/dp/#{isbn}"))
+      self.title = retrive.css('#btAsinTitle').text.to_s
+      self.description = retrive.css('#productDescription .content').text.to_s
+      self.image = "http://ecx.images-amazon.com/images/P/#{isbn}.01.LZZZZZZ"
+    rescue
+    end
   end
   def search_rakuten
   end
