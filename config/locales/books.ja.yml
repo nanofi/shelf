@@ -5,6 +5,8 @@ ja:
     edit: '本を編集'
     show: "本 '%{title}'"
     search: '本を検索'
+    links: 'リンク'
+    relevant: '関連'
   activerecord:
     models:
       book: 本

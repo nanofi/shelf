@@ -5,6 +5,8 @@ class Book < ActiveRecord::Base
   default_scope order: 'updated_at DESC'
   attr_accessible :image, :isbn, :place, :title, :authors, :publisher, :published, :description, :google
 
+  has_many :relevants, dependent: :destroy
+
   def image
     image = read_attribute(:image)
     image.blank? ? 'default.png' : image

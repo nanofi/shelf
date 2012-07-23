@@ -4,6 +4,7 @@
 
 = render @book
 = render partial: 'links', locals: {book: @book}
+= render partial: 'relevant', locals: {book: @book}
 
 = link_to 'Edit', edit_book_path(@book)
 \|
