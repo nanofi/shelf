@@ -1,9 +1,9 @@
 class Relevant < ActiveRecord::Base
   belongs_to :book
-  attr_accessible :type, :url
+  attr_accessible :what, :url, :book_id
 
   class << self
-    def types
+    def whats
       [ 'link', 'globe', 'picture', 'file']
     end
   end

@@ -1,0 +1,5 @@
+%li[relevant]
+  %i{class: "icon-#{relevant.what}"}
+  = link_to relevant.url, relevant.url
+  = link_to relevant_path(relevant), :class => [:btn, :'btn-mini', :'btn-danger'], :method => :delete, :remote => true do
+    %i.icon-remove

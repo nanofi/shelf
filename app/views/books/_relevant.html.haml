@@ -1,10 +1,9 @@
 %h3= t('books.relevant')
-%ul.unstyled
+%ul#relevant_list.unstyled
   - book.relevants.each do |relevant|
-    %li
-      %i{class: "icon-#{relevant.type}"}
-      = link_to relevant.url, relevant.url
-= simple_form_for Relevant.new, wrapper: :inline, remote: true, html: {class: 'form-inline'} do |f|
-  = f.input :type, as: :icon, collection: Relevant.types
+    = render relevant
+= simple_form_for @book.relevants.build, wrapper: :inline, remote: true, html: {class: 'form-inline'} do |f|
+  = f.input :book_id, as: :hidden
+  = f.input :what, as: :icon, collection: Relevant.whats
   = f.input :url, as: :url
   = f.button :submit, t('relevant.add')

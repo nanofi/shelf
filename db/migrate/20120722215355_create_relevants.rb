@@ -1,7 +1,7 @@
 class CreateRelevants < ActiveRecord::Migration
   def change
     create_table :relevants do |t|
-      t.string :type, null: false, default: 'link'
+      t.string :what, null: false, default: 'link'
       t.string :url, null: false
       t.references :book
 

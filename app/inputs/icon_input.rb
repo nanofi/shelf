@@ -4,7 +4,7 @@ class IconInput < SimpleForm::Inputs::CollectionInput
   include ActionView::Helpers::UrlHelper
 
   def input
-    tag = ActionView::Helpers::InstanceTag.new object_name, attribute_name, template, nil
+    tag = ActionView::Helpers::InstanceTag.new object_name, attribute_name, template, object
     class << tag
       def id(options)
         options = options.stringify_keys

@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(:version => 20120722215355) do
   add_index "books", ["updated_at"], :name => "index_books_on_updated_at"
 
   create_table "relevants", :force => true do |t|
-    t.string   "type",       :default => "link", :null => false
+    t.string   "what",       :default => "link", :null => false
     t.string   "url",                            :null => false
     t.integer  "book_id"
     t.datetime "created_at",                     :null => false
