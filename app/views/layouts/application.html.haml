@@ -29,7 +29,7 @@
           = link_to 'Shelf', root_path, class: 'brand'
           .container.nav-collapse
             %ul.nav.pull-left
-            = form_tag({action: :search}, {class: 'navbar-search pull-left form-inline'}) do
+            = form_tag({action: :search}, {method: :get, class: 'navbar-search pull-left form-inline'}) do
               = label_tag :query, "<i class='icon-search'></i>".html_safe
               = text_field_tag :query, nil, placefolder: t('books.search'), class: 'search-query'
             %ul.nav.pull-right      

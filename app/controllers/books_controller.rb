@@ -2,7 +2,8 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    @books = Book.page(params[:page])
+    @books = Book
+    narrow
 
     respond_to do |format|
       format.html # index.html.erb
@@ -85,11 +86,20 @@ class BooksController < ApplicationController
     table = Book.arel_table
     query = params[:query]
     
-    @books = Book.where(table[:isbn].eq(query).or(table[:title].matches("#{query}%"))).page(params[:page])
+    @books = Book.where(table[:isbn].eq(query).or(table[:title].matches("#{query}%")))
+    narrow
 
     respond_to do |format|
       format.html { render 'index' }
       format.json { render json: @books }
     end
+  end
+  
+  private
+  def narrow
+    @isbn = !params[:isbn].nil?
+    @books = @books.select([:id, :title, :isbn]) if @isbn
+    @books = @books.page(params[:page])
+    @books = @books.per(50) if @isbn
   end
 end
