@@ -1,7 +1,28 @@
 - set_meta_tags title: t('books.index')
-= paginate @books
-%ul.thumbnails
-  - @books.each do |book|
-    %li.span3
-      = link_to book, class: 'thumbnail book-item' do
-        = render book
+.row
+  .span3
+    .pagination
+      %ul
+        %li{class: @isbn ? nil : [:active]}= link_to t('books.thumbnail'), params.merge(isbn: nil)
+        %li{class: @isbn ? [:active] : nil}= link_to t('books.isbn'), params.merge(isbn: true)
+  .span6
+    = paginate @books
+- if @isbn
+  %table.table.table-striped
+    %thead
+      %tr
+        %th= raw Book.human_attribute_name(:id)
+        %th= raw Book.human_attribute_name(:title)
+        %th= raw Book.human_attribute_name(:isbn)
+    %tbody
+      - @books.each do |book|
+        %tr
+          %td= book.id
+          %td= raw book.title
+          %td= raw book.isbn
+- else
+  %ul.thumbnails
+    - @books.each do |book|
+      %li.span3
+        = link_to book, class: 'thumbnail book-item' do
+          = render book
