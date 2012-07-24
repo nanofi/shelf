@@ -6,6 +6,8 @@ class Book < ActiveRecord::Base
   attr_accessible :image, :isbn, :place, :title, :authors, :publisher, :published, :description, :google
 
   has_many :relevants, dependent: :destroy
+  has_many :entities, dependent: :destroy
+  has_many :places, through: :entities
 
   def image
     image = read_attribute(:image)

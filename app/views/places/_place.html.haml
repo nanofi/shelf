@@ -1,0 +1,6 @@
+%tr[place]
+  %th= link_to place.name, place_path(place)
+  %th= place.entities.size
+  %th
+    = link_to place_path(place), method: :delete, remote: true, class: [:btn, :'btn-danger'] do
+      %i.icon-remove
