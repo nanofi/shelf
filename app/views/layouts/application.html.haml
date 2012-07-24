@@ -29,7 +29,7 @@
           = link_to 'Shelf', root_path, class: 'brand'
           .container.nav-collapse
             %ul.nav.pull-left
-            = form_tag({action: :search}, {method: :get, class: 'navbar-search pull-left form-inline'}) do
+            = form_tag({controller: :books, action: :search}, {method: :get, class: 'navbar-search pull-left form-inline'}) do
               = label_tag :query, "<i class='icon-search'></i>".html_safe
               = text_field_tag :query, nil, placefolder: t('books.search'), class: 'search-query'
             %ul.nav.pull-right      
@@ -37,6 +37,10 @@
                 = link_to books_path do
                   %i.icon-book
                   = t('books.index')
+              %li
+                = link_to places_path do
+                  %i.icon-hdd
+                  = t('places.index')
               %li
                 = link_to new_book_path do
                   %i.icon-plus
@@ -60,6 +64,10 @@
                   = link_to new_book_path do
                     %i.icon-plus
                     = t('books.new')
+                %li{class: disabled_current(places_path)}
+                  = link_to places_path do
+                    %i.icon-hdd
+                    = t('places.index')
     
       %footer
         %p &copy; Kazuto Fukuchi 2012

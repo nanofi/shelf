@@ -1,0 +1,13 @@
+- set_meta_tags title: t('places.index')
+= simple_form_for Place.new, wrapper: :inline, remote: true, html: {class: 'form-inline'} do |f|
+  = f.input :name
+  = f.button :submit, class: 'btn-primary', data: {:'loading-text' => 'wating...'}
+%table.table.table-striped
+  %thead
+    %tr
+      %th.span7= Place.human_attribute_name(:name)
+      %th.span1
+      %th.span1
+  %tbody#places-table
+    - @places.each do |place|
+      = render place
