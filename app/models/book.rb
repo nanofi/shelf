@@ -8,6 +8,7 @@ class Book < ActiveRecord::Base
   has_many :relevants, dependent: :destroy
   has_many :entities, dependent: :destroy
   has_many :places, through: :entities
+  has_many :comments, dependent: :destroy
 
   def image
     image = read_attribute(:image)
