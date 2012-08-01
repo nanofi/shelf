@@ -14,10 +14,7 @@ class Book < ActiveRecord::Base
     image.blank? ? 'default.png' : image
   end
 
-  def google_url
-    google.present? ? "http://books.google.com/books?id=#{google}" : "http://books.google.com/books?vid=ISBN#{isbn}"
-  end
-  def amazon_url
+  def isbn10
     identify = isbn
     begin
       identify = identify[3..11]
@@ -34,8 +31,14 @@ class Book < ActiveRecord::Base
       end
       identify += check_digit
     end if identify.length != 10
-    p identify
-    "http://www.amazon.co.jp/dp/#{identify}"
+    identify
+  end
+
+  def google_url
+    google.present? ? "http://books.google.com/books?id=#{google}" : "http://books.google.com/books?vid=ISBN#{isbn}"
+  end
+  def amazon_url
+    "http://www.amazon.co.jp/dp/#{isbn10}"
   end
 
   before_save :store_from_isbn
@@ -65,10 +68,10 @@ class Book < ActiveRecord::Base
   end
   def search_amazon
     begin
-      retrive = Nokogiri::HTML(open("http://www.amazon.co.jp/dp/#{isbn}"))
+      retrive = Nokogiri::HTML(open("http://www.amazon.co.jp/dp/#{isbn10}"))
       self.title = retrive.css('#btAsinTitle').text.to_s
       self.description = retrive.css('#productDescription .content').text.to_s
-      self.image = "http://ecx.images-amazon.com/images/P/#{isbn}.01.LZZZZZZ"
+      self.image = "http://ecx.images-amazon.com/images/P/#{isbn10}.01.LZZZZZZ"
     rescue
     end
   end
