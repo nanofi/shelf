@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120723180552) do
+ActiveRecord::Schema.define(:version => 20120801081627) do
 
   create_table "books", :force => true do |t|
     t.string   "isbn",        :default => "", :null => false
@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(:version => 20120723180552) do
 
   create_table "relevants", :force => true do |t|
     t.string   "what",       :default => "link", :null => false
-    t.string   "url",                            :null => false
+    t.text     "url",                            :null => false
     t.integer  "book_id"
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false
