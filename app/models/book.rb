@@ -18,7 +18,24 @@ class Book < ActiveRecord::Base
     google.present? ? "http://books.google.com/books?id=#{google}" : "http://books.google.com/books?vid=ISBN#{isbn}"
   end
   def amazon_url
-    "http://www.amazon.co.jp/dp/#{isbn}"
+    identify = isbn
+    begin
+      identify = identify[3..11]
+      check_digit = 0
+      identify.split(//).each.with_index do |char, index|
+        check_digit += char.to_i * (10 - index)
+      end
+      check_digit = 11 - (check_digit % 11)
+      case check_digit
+      when 10 then
+        check_digit = "X"
+      when 11 then
+        check_digit = 0
+      end
+      identify += check_digit
+    end if identify.length != 10
+    p identify
+    "http://www.amazon.co.jp/dp/#{identify}"
   end
 
   before_save :store_from_isbn
