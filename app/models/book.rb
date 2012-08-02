@@ -29,7 +29,7 @@ class Book < ActiveRecord::Base
       when 11 then
         check_digit = 0
       end
-      identify += check_digit
+      identify = "identify#{check_digit}"
     end if identify.length != 10
     identify
   end
