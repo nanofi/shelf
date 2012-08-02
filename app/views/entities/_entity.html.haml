@@ -1,0 +1,3 @@
+%li[entity]
+  = simple_form_for entity, wrapper: :inline, remote: true, html: {class: 'form-inline'} do |f|
+    = f.association :place

@@ -1,0 +1,3 @@
+= simple_form_for Entity.new(book: @book), wrapper: :inline, remote: true, html: {class: 'form-inline'} do |f|
+  = f.association :book, as: :hidden
+  = f.association :place

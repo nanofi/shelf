@@ -6,6 +6,7 @@ Shelf::Application.routes.draw do
     end
   end
   resources :relevants, only: [:create, :destroy]
+  resources :entities, only: [:create, :update]
 
   root to: 'books#index'
 end

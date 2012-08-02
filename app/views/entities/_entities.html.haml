@@ -1,0 +1,7 @@
+= content_for :sidebar do
+  .well.sidebar-nav
+    %h3= raw t('entities.title')
+    %ul.nav.nav-list#entities_list
+      - @book.entities.each do |entity|
+        = render entity
+    = render 'entities/new'
