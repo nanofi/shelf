@@ -1,0 +1,5 @@
+<% if @destroy %>
+  (function(){
+    $("#<%= "#{@entity.class.name.underscore}_#{@entity.id}" %>").remove();
+  })()
+<% end %>
