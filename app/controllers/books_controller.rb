@@ -100,6 +100,8 @@ class BooksController < ApplicationController
     @isbn = !params[:isbn].nil?
     @books = @books.select([:id, :title, :isbn]) if @isbn
     @books = @books.page(params[:page])
-    @books = @books.per(50) if @isbn
+    per = params[:per]
+    per ||= 50 if @isbn
+    @books = @books.per(per) unless per.nil?
   end
 end
