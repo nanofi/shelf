@@ -48,6 +48,7 @@ class Book < ActiveRecord::Base
       @retrived = JSON.load(io)
     end
     book = @retrived['items'].select do |b|
+      next if b['volumeInfo']["industryIdentifiers"].nil?
       b['volumeInfo']["industryIdentifiers"].any? do |i|
         /^ISBN/ =~ i['type'] and i['identifier'] == self.isbn
       end
@@ -57,7 +58,7 @@ class Book < ActiveRecord::Base
     self.google = book['id']
     self.title = info['title']
     self.title = "#{self.title} <small>#{info['subtitle']}</small>".html_safe if info['subtitle']
-    self.authors = info['authors'].map{|a| "<li>#{a}</li>".html_safe}.join(' ')
+    self.authors = info['authors'].nil? ? '' : info['authors'].map{|a| "<li>#{a}</li>".html_safe}.join(' ')
     self.publisher = info['publisher'] || ''
     begin
       self.published = info['publishedDate'].to_datetime
